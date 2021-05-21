@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:touring_by/core/models/api_response.dart';
 import 'package:touring_by/core/models/place.dart';
-import 'package:touring_by/core/services/api_services/get_model_api_service.dart';
+import 'package:touring_by/core/services/api_services/choose_tour_api_service.dart';
 import 'package:touring_by/locator.dart';
 
 enum ViewState { Idle, Busy }

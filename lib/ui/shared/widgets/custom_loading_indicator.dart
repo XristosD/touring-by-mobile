@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
   final Color color;
-  CustomLoadingIndicator({this.color});
+  final double strokeWidth;
+  CustomLoadingIndicator({this.color, this.strokeWidth = 5.0});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class CustomLoadingIndicator extends StatelessWidget {
       valueColor: AlwaysStoppedAnimation<Color>(
         color,
       ),
-      strokeWidth: 5.0,
+      strokeWidth: this.strokeWidth,
     );
   }
 }

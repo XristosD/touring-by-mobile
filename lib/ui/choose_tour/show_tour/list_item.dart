@@ -3,9 +3,15 @@ import 'package:touring_by/core/models/point.dart';
 import 'package:touring_by/ui/shared/widgets/custom_expandable_text.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class ListItem extends StatelessWidget {
+class ListItem extends StatefulWidget {
   final Point point;
   ListItem({this.point});
+
+  @override
+  _ListItemState createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +22,7 @@ class ListItem extends StatelessWidget {
           children: [
             FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
-              image: point.image,
+              image: widget.point.image,
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
@@ -24,7 +30,7 @@ class ListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    point.name,
+                    widget.point.name,
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
@@ -33,7 +39,7 @@ class ListItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: CustomExpandableText(
-                      text: point.description,
+                      text: widget.point.description,
                       expandBreakPoint: 100,
                     ),
                   ),
@@ -45,4 +51,6 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -7,12 +7,12 @@ import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/main_view.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:touring_by/ui/shared/widgets/custom_loading_indicator.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/list_item.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/available_tours_pinned.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/place_descripton.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/place_image.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/place_name_pinned.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/tour_list.dart';
+import 'package:touring_by/ui/choose_tour/show_place/list_item.dart';
+import 'package:touring_by/ui/choose_tour/show_place/available_tours_pinned.dart';
+import 'package:touring_by/ui/choose_tour/show_place/place_descripton.dart';
+import 'package:touring_by/ui/choose_tour/show_place/place_image.dart';
+import 'package:touring_by/ui/choose_tour/show_place/place_name_pinned.dart';
+import 'package:touring_by/ui/choose_tour/show_place/tour_list.dart';
 
 class ShowPlaceView extends StatefulWidget {
   @override
@@ -62,7 +62,9 @@ class _ShowPlaceViewState extends State<ShowPlaceView> {
                               (BuildContext context, int index) {
                                 Tour tour = model.itemList[index];
                             return ListItem(tour: tour);
-                          }, childCount: model.itemCount),
+                          }, childCount: model.itemCount,
+                            addAutomaticKeepAlives: true,
+                          ),
                         ),
                 ),
               ],

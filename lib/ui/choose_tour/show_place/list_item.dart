@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:touring_by/core/models/tour.dart';
+import 'package:touring_by/core/models/touring_by_initial_state.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:touring_by/ui/shared/widgets/custom_expandable_text.dart';
 
-class ListItem extends StatelessWidget {
+class ListItem extends StatefulWidget {
   final Tour tour;
   ListItem({@required this.tour});
 
+  @override
+  _ListItemState createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> with AutomaticKeepAliveClientMixin  {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,7 +33,7 @@ class ListItem extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 6, right: 2),
                         child: Text(
-                          tour.name,
+                          widget.tour.name,
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
@@ -38,12 +44,12 @@ class ListItem extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 8, bottom: 8, left: 2, right: 6),
                       child: GestureDetector(
-                        onTap: () { Navigator.pushNamed(context, "/show_tour", arguments: tour); },
+                        onTap: () { Navigator.pushNamed(context, "/show_tour", arguments: widget.tour); },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "check ${tour.pointsCount.toString()} point${tour.pointsCount == 1 ? '' : 's'}",
+                              "check ${widget.tour.pointsCount.toString()} point${widget.tour.pointsCount == 1 ? '' : 's'}",
                               style: TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -69,7 +75,7 @@ class ListItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12)
                     ),
                     child: GestureDetector(
-                      onTap: () { Navigator.pushNamed(context, "/take_tour", arguments: tour); },
+                      onTap: () { Navigator.pushNamed(context, "/take_tour", arguments: TouringByInitialState(tourId: widget.tour.id)); },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -96,7 +102,7 @@ class ListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8, left: 6, right: 6),
                   child: CustomExpandableText(
-                    text: tour.description,
+                    text: widget.tour.description,
                     expandBreakPoint: 150,
                   ),
                 )
@@ -111,6 +117,11 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 

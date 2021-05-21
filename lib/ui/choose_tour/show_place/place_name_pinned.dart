@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/custom_persistent_header.dart';
+import 'package:touring_by/ui/choose_tour/show_place/custom_persistent_header.dart';
 
 class placeNamePinned extends StatelessWidget {
   const placeNamePinned({

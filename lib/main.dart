@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:touring_by/core/services/user_service.dart';
 import 'package:touring_by/ui/authentication/views/login_view.dart';
 import 'package:touring_by/ui/authentication/views/register_view.dart';
-import 'package:touring_by/ui/show_or_index_model/index_place/index_place_view.dart';
+import 'package:touring_by/ui/choose_tour/index_place/index_place_view.dart';
 import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
-import 'package:touring_by/ui/show_or_index_model/show_place/show_place_view.dart';
-import 'package:touring_by/ui/show_or_index_model/show_tour/show_tour_view.dart';
+import 'package:touring_by/ui/choose_tour/show_place/show_place_view.dart';
+import 'package:touring_by/ui/choose_tour/show_tour/show_tour_view.dart';
+import 'package:touring_by/ui/show_touring_by/share_touring_by_view.dart';
+import 'package:touring_by/ui/show_touring_by/show_touring_by_view.dart';
 import 'package:touring_by/ui/take_tour/take_tour_view.dart';
 
 import 'core/models/user.dart';
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
         '/show_place': (context) => ShowPlaceView(),
         '/show_tour': (context) => ShowTourView(),
         '/take_tour': (context) => TakeTourView(),
+        '/show_touring_by': (context) => ShowTouringByView(),
+        '/share_touring_by' : (context) => ShareTouringByView(),
       },
     );
   }

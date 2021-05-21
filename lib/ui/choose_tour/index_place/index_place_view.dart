@@ -9,8 +9,8 @@ import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/main_view.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:touring_by/ui/shared/widgets/custom_loading_indicator.dart';
-import 'package:touring_by/ui/show_or_index_model/index_place/list_header.dart';
-import 'package:touring_by/ui/show_or_index_model/index_place/list_item.dart';
+import 'package:touring_by/ui/choose_tour/index_place/list_header.dart';
+import 'package:touring_by/ui/choose_tour/index_place/list_item.dart';
 
 class IndexPlaceView extends StatefulWidget {
   @override

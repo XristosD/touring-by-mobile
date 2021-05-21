@@ -34,6 +34,8 @@ dependencies:
   device_info: ^1.0.0
   shared_preferences: ^0.5.12+4
   transparent_image: any
+  google_maps_flutter: ^1.2.0
+  image_picker: any
 
 dev_dependencies:
   flutter_test:

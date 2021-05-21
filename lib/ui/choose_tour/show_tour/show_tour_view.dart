@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:touring_by/core/models/point.dart';
 import 'package:touring_by/core/models/tour.dart';
+import 'package:touring_by/core/models/touring_by_initial_state.dart';
 import 'package:touring_by/core/viewmodels/show_tour_model.dart';
 import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/main_view.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:touring_by/ui/shared/widgets/custom_loading_indicator.dart';
-import 'package:touring_by/ui/show_or_index_model/show_tour/list_item.dart';
+import 'package:touring_by/ui/choose_tour/show_tour/list_item.dart';
 
 class ShowTourView extends StatefulWidget {
   @override
@@ -57,6 +58,7 @@ class _ShowTourViewState extends State<ShowTourView> {
                 bottom: 14,
                 right: 17,
                 child: FloatingActionButton.extended(
+                  onPressed: () { Navigator.pushNamed(context, "/take_tour", arguments: TouringByInitialState(tourId: tour.id));},
                   icon: Icon(Icons.directions_walk),
                   label: Text("Start Tour"),
                   elevation: 10,
