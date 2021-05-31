@@ -29,8 +29,6 @@ class ShowPlaceModel extends ChangeNotifier {
     if(_initialLoad){
       _initialLoad = false;
     }
-    // TODO to be removed on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     ApiResponse response = await locator<GetModelApiService>().getToursForPlace(placeId);
     if(response.success){
       itemList = List<Tour>.from(response.body["tours"].map((item) => Tour.fromJson(item)));

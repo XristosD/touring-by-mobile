@@ -37,8 +37,6 @@ class TouringByModel extends ChangeNotifier {
     }
     ApiResponse response;
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     if(touringByInitialState.newTouringBy){
       response = await locator<TouringByApiService>().newTouringByForTour(touringByInitialState.tourId);
     }
@@ -58,8 +56,6 @@ class TouringByModel extends ChangeNotifier {
 
     setState(ViewState.Completing);
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<TouringByApiService>().finishTouringBy(this.touringBy.id);
     setState(ViewState.Idle);
     if(response.success){
@@ -79,8 +75,6 @@ class TouringByModel extends ChangeNotifier {
     }
     ApiResponse response;
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<TouringByApiService>().curentTouringByPointForTouringBy(this.touringBy.id);
     if(response.success) {
       this.currentTouringByPoint = TouringByPoint.fromJson(response.body);
@@ -96,8 +90,6 @@ class TouringByModel extends ChangeNotifier {
 
     skipCurrent ? setState(ViewState.Skipping) : setState(ViewState.GettingNext);
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<TouringByApiService>().NextTouringByPointForTouringBy(this.touringBy.id, skipCurrent);
     if(response.success) {
       this.currentTouringByPoint = TouringByPoint.fromJson(response.body);

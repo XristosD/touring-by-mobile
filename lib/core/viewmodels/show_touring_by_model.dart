@@ -22,8 +22,6 @@ class ShowTouringByModel extends ChangeNotifier {
   Future initiallizeData({int touringById}) async {
     ApiResponse response;
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<ShowTouringByApiService>().showTouringBy(touringById);
     if(response.success){
       _data = Map<String, dynamic>.from(response.body);

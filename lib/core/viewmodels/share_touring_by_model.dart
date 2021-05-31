@@ -27,8 +27,6 @@ class ShareTouringByModel extends ChangeNotifier {
     this._errorReturned = false;
     this._shareResult = false;
 
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<ShowTouringByApiService>().findUserByEmail(email);
     if(response.success){
       this._sharedUserFound = true;
@@ -54,8 +52,6 @@ class ShareTouringByModel extends ChangeNotifier {
     setState(ViewState.Busy);
 
     // _shareResult = false;
-    // TODO remove on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     response = await locator<ShowTouringByApiService>().shareTouringByToUser(touringById, this.sharedUserId);
     print(response.body.toString());
     if(response.success) {

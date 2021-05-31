@@ -35,8 +35,6 @@ class IndexPlaceModel extends ChangeNotifier {
     if(_initialLoad){
       _initialLoad = false;
     }
-    // TODO to be removed on deploy
-    await new Future.delayed(const Duration(seconds: 2));
     ApiResponse response = await locator<GetModelApiService>().getPlacesForPage(nextPage);
     if(response.success){
       _hasmore = response.body["next_page_url"] == null ? false : true;
