@@ -21,14 +21,14 @@ class TouringByModel extends ChangeNotifier {
   TouringBy touringBy;
   TouringByPoint currentTouringByPoint;
   bool _showDescription = false;
-  Completer<GoogleMapController> _controller ;
+  Completer<GoogleMapController> _controller = Completer() ;
   ScaffoldState scaffold;
 
   ViewState get state => _state;
   double get showDescrptionOpacity => _showDescription ? 1.0 : 0.0;
   bool get ignorePointerDescription => !_showDescription;
   bool get lastPoint => !currentTouringByPoint.hasNext;
-  Completer<GoogleMapController> get controller => _controller ?? (_controller = Completer());
+  Completer<GoogleMapController> get controller => _controller ;
 
 
   Future initiallizeTouringBy({TouringByInitialState touringByInitialState, ScaffoldState scaffold}) async {
@@ -41,6 +41,9 @@ class TouringByModel extends ChangeNotifier {
     await new Future.delayed(const Duration(seconds: 2));
     if(touringByInitialState.newTouringBy){
       response = await locator<TouringByApiService>().newTouringByForTour(touringByInitialState.tourId);
+    }
+    else{
+      response = await locator<TouringByApiService>().getTouringBy(touringByInitialState.touringById);
     }
     if(response.success){
       this.touringBy = TouringBy.fromJson(response.body);
@@ -153,9 +156,9 @@ class TouringByModel extends ChangeNotifier {
   }
 
   Future<void> animateCamera(double latitude, double longitude) async {
-    while(!this._controller.isCompleted){
-      Future.delayed(Duration(milliseconds: 500));
-    }
+    // while(!this._controller.isCompleted){
+    //   Future.delayed(Duration(milliseconds: 500));
+    // }
     final GoogleMapController controller = await this._controller.future;
     controller.animateCamera(CameraUpdate.newLatLngZoom(LatLng(latitude, longitude), 18));
   }

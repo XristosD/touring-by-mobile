@@ -17,7 +17,7 @@ class ShowTouringByModel extends ChangeNotifier {
   String get date => formatter.format(DateTime.parse(_data['created_at']));
   String get userName => _data['user']['name'];
   bool get ownerTouringBy  => _data['user']['owner'];
-  bool get resumeTouringByOption => true; //_data['user']['owner'] && !_data['completed'];
+  bool get resumeTouringByOption => _data['user']['owner'] && !_data['completed'];
 
   Future initiallizeData({int touringById}) async {
     ApiResponse response;
@@ -27,7 +27,6 @@ class ShowTouringByModel extends ChangeNotifier {
     response = await locator<ShowTouringByApiService>().showTouringBy(touringById);
     if(response.success){
       _data = Map<String, dynamic>.from(response.body);
-      print(_data['touring_by_point'][0]['like'].runtimeType);
     }
     else{
       print(response.body.toString());

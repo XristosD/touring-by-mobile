@@ -114,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                                 alignment: Alignment.centerRight,
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/');
+                                    Navigator.pushNamed(context, '/register');
                                   },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,

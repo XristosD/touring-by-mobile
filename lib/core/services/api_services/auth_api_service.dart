@@ -53,4 +53,25 @@ class AuthApiService {
 
     }
   }
+
+  Future<ApiResponse> logout() async {
+    try{
+      var response = await client.get(
+        "$endpoint/logout",
+        headers: Map.fromEntries([
+          acceptJsonHeader,
+          await authenticationHeader
+        ]),
+      );
+      if(response.statusCode == 200){
+        return ApiResponse(success: true);
+      }
+      else{
+        return ApiResponse(success: false);
+      }
+    }
+    catch (e) {
+      return ApiResponse(success: false, body: e );
+    }
+  }
 }

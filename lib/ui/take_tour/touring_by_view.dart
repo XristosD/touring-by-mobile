@@ -8,6 +8,7 @@ import 'package:touring_by/ui/take_tour/custom_rounded_button.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point_parent.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point_welcome.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TouringByView extends StatefulWidget {
   @override
@@ -29,29 +30,65 @@ class _TouringByViewState extends State<TouringByView> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height/3,
-              child: Consumer<TouringByModel>(
-                builder: (context, model, child) {
-                  return GoogleMap(
-                    mapType: MapType.normal,
-                    initialCameraPosition: _kGooglePlex,
-                    markers: model.currentTouringByPoint != null ?
-                      {
-                        Marker(
-                          markerId: MarkerId(model.currentTouringByPoint.id.toString()),
-                          position: LatLng(model.currentTouringByPoint.point.latitude, model.currentTouringByPoint.point.longitude)
+            child: Consumer<TouringByModel>(
+              builder: (context, model, child){
+                return Stack(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/3,
+                      child: GoogleMap(
+                        mapType: MapType.normal,
+                        initialCameraPosition: _kGooglePlex,
+                        markers: model.currentTouringByPoint != null ?
+                        {
+                          Marker(
+                              markerId: MarkerId(model.currentTouringByPoint.id.toString()),
+                              position: LatLng(model.currentTouringByPoint.point.latitude, model.currentTouringByPoint.point.longitude)
+                          )
+                        } :
+                        null,
+                        onMapCreated: (GoogleMapController controller) {
+                          if(!model.controller.isCompleted){
+                            model.controller.complete(controller);
+                          }
+                        },
+                      ),
+                    ),
+                    Positioned(
+                        right: 0,
+                        top: 0,
+                        child: TextButton(
+                          onPressed: () async {
+                            final url = 'https://www.google.com/maps/search/?api=1&query=${model.currentTouringByPoint.point.latitude},${model.currentTouringByPoint.point.longitude}';
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            }
+                            else{
+                              print("not launched");
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "maps",
+                                style: TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: primaryColor
+                                ),
+                              ),
+                              SizedBox(width: 3,),
+                              Icon(Icons.map_rounded, color: primaryColor, size: 15.0,)
+                            ],
+                          ),
+                          style: TextButton.styleFrom(
+                            primary: primaryColor,
+                          ),
                         )
-                      } :
-                      null,
-                    onMapCreated: (GoogleMapController controller) {
-                      if(!model.controller.isCompleted){
-                        model.controller.complete(controller);
-                      }
-                    },
-                  );
-                },
-              ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Expanded(

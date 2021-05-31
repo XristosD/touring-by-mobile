@@ -24,4 +24,9 @@ class SharedPreferencesService {
 
     return jsonValue;
   }
+
+  Future<bool> clear() async {
+    final SharedPreferences shared = await SharedPreferences.getInstance();
+    return await shared.clear();
+  }
 }

@@ -29,6 +29,27 @@ class TouringByApiService {
     }
   }
 
+  Future<ApiResponse> getTouringBy(int touringById) async {
+    try {
+      var response = await client.get(
+        "$endpoint/touringby/$touringById/resume",
+        headers: Map.fromEntries([
+          acceptJsonHeader,
+          await authenticationHeader
+        ]),
+      );
+      if(response.statusCode == 200){
+        return ApiResponse(success: true, body: jsonDecode(response.body));
+      }
+      else{
+        return ApiResponse(success: false, body: jsonDecode(response.body));
+      }
+    }
+    catch (e) {
+      return ApiResponse(success: false, body: e );
+    }
+  }
+
   Future<ApiResponse> finishTouringBy(int touringById) async{
     try {
       var response = await client.get(

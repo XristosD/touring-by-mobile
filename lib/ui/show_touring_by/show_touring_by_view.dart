@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
+import 'package:touring_by/core/models/touring_by_initial_state.dart';
 import 'package:touring_by/core/services/api_services/api_helpers.dart';
 import 'package:touring_by/core/viewmodels/show_tour_model.dart';
 import 'package:touring_by/core/viewmodels/show_touring_by_model.dart';
@@ -49,7 +50,7 @@ class _ShowTouringByViewState extends State<ShowTouringByView> {
                                   Provider.of<ShowTouringByModel>(context, listen: false).resumeTouringByOption ?
                                   MaterialButton(
                                     minWidth: 0,
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.pushNamed(context, "/take_tour", arguments: TouringByInitialState(touringById: touringById));},
                                     elevation: 2.0,
                                     color:  Colors.white,
                                     // fillColor: primaryColor,

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:touring_by/core/services/api_services/auth_api_service.dart';
 import 'package:touring_by/core/services/api_services/choose_tour_api_service.dart';
+import 'package:touring_by/core/services/api_services/index_touring_by_api_service.dart';
 import 'package:touring_by/core/services/api_services/show_touring_by_api_service.dart';
 import 'package:touring_by/core/services/api_services/touring_by_api_service.dart';
 import 'package:touring_by/core/services/image_picker_service.dart';
@@ -9,6 +10,8 @@ import 'package:touring_by/core/services/shared_preferences_service.dart';
 import 'package:touring_by/core/services/user_service.dart';
 import 'package:touring_by/core/services/validation_service.dart';
 import 'package:touring_by/core/viewmodels/index_place_model.dart';
+import 'package:touring_by/core/viewmodels/index_touring_by_model.dart';
+import 'package:touring_by/core/viewmodels/logout_model.dart';
 import 'package:touring_by/core/viewmodels/register_model.dart';
 import 'package:touring_by/core/viewmodels/show_place_model.dart';
 import 'package:touring_by/core/viewmodels/show_tour_model.dart';
@@ -40,4 +43,7 @@ void setupLocator(){
   locator.registerFactory(() =>  ShowTouringByApiService());
   locator.registerFactory(() =>  ShowTouringByModel());
   locator.registerFactory(() =>  ShareTouringByModel());
+  locator.registerFactory(() =>  IndexTouringByModel());
+  locator.registerFactory(() =>  IndexTouringByApiService());
+  locator.registerFactory(() =>  LogoutModel());
 }

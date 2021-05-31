@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:touring_by/core/services/shared_preferences_service.dart';
 import 'package:touring_by/core/services/user_service.dart';
 import 'package:touring_by/ui/authentication/views/login_view.dart';
 import 'package:touring_by/ui/authentication/views/register_view.dart';
@@ -9,6 +10,7 @@ import 'package:touring_by/ui/choose_tour/show_place/show_place_view.dart';
 import 'package:touring_by/ui/choose_tour/show_tour/show_tour_view.dart';
 import 'package:touring_by/ui/show_touring_by/share_touring_by_view.dart';
 import 'package:touring_by/ui/show_touring_by/show_touring_by_view.dart';
+import 'package:touring_by/ui/index_touring_by/index_touring_by_view.dart';
 import 'package:touring_by/ui/take_tour/take_tour_view.dart';
 
 import 'core/models/user.dart';
@@ -17,7 +19,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   final bool hasUser = await locator<UserService>().hasUser();
-  // print(hasUser);
   runApp(MyApp(
     hasUser: hasUser,
   ));
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
         '/take_tour': (context) => TakeTourView(),
         '/show_touring_by': (context) => ShowTouringByView(),
         '/share_touring_by' : (context) => ShareTouringByView(),
+        '/index_touring_by' : (context) => IndexTouringByView()
       },
     );
   }

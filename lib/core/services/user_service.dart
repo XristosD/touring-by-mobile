@@ -33,5 +33,12 @@ class UserService {
     return _user == null ? null :_user.token;
   }
 
+  Future<bool> logout() async {
+    if (await locator<SharedPreferencesService>().clear()){
+      _user = null;
+      return true;
+    }
+    return false;
+  }
 
 }
