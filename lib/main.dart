@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:touring_by/core/models/touring_by_initial_state.dart';
+import 'package:touring_by/core/services/local_notifications_service.dart';
 import 'package:touring_by/core/services/shared_preferences_service.dart';
 import 'package:touring_by/core/services/user_service.dart';
 import 'package:touring_by/ui/authentication/views/login_view.dart';
@@ -18,16 +20,23 @@ import 'core/models/user.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  final bool hasUser = await locator<UserService>().hasUser();
+  await locator<LocalNotificationsService>().init();
+  String initialRoute = '/login';
+  if(await locator<UserService>().hasUser()){
+    initialRoute = '/';
+  }
+  // if(await locator<LocalNotificationsService>().localNotifificationLaunched()){
+  //   initialRoute = '/take_tour';
+  // }
   runApp(MyApp(
-    hasUser: hasUser,
+    initialRoute: initialRoute,
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final bool hasUser;
+  final String initialRoute;
 
-  MyApp({this.hasUser});
+  MyApp({this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +60,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: RegisterView(),
-      initialRoute: hasUser ? '/' : '/login',
+      // onGenerateRoute: onGenerateRoute,
+      // onGenerateInitialRoutes: (String initialRouteName){
+      //   return [];
+      // },
+      initialRoute: this.initialRoute,
       // initialRoute: '/',
       routes: {
         '/': (context) => IndexPlaceView(),

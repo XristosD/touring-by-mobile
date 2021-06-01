@@ -5,6 +5,7 @@ import 'package:touring_by/core/services/api_services/index_touring_by_api_servi
 import 'package:touring_by/core/services/api_services/show_touring_by_api_service.dart';
 import 'package:touring_by/core/services/api_services/touring_by_api_service.dart';
 import 'package:touring_by/core/services/image_picker_service.dart';
+import 'package:touring_by/core/services/local_notifications_service.dart';
 import 'package:touring_by/core/services/pick_image_with_dialog_service.dart';
 import 'package:touring_by/core/services/shared_preferences_service.dart';
 import 'package:touring_by/core/services/user_service.dart';
@@ -46,4 +47,5 @@ void setupLocator(){
   locator.registerFactory(() =>  IndexTouringByModel());
   locator.registerFactory(() =>  IndexTouringByApiService());
   locator.registerFactory(() =>  LogoutModel());
+  locator.registerSingleton<LocalNotificationsService>(LocalNotificationsService());
 }

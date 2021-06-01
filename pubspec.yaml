@@ -37,6 +37,7 @@ dependencies:
   google_maps_flutter: ^1.2.0
   image_picker: any
   url_launcher: any
+  flutter_local_notifications: any
 
 dev_dependencies:
   flutter_test:

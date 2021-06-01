@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:touring_by/core/services/local_notifications_service.dart';
 import 'package:touring_by/core/viewmodels/touring_by_model.dart';
+import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:touring_by/ui/shared/widgets/custom_loading_indicator.dart';
@@ -62,6 +64,11 @@ class _TouringByViewState extends State<TouringByView> {
                             final url = 'https://www.google.com/maps/search/?api=1&query=${model.currentTouringByPoint.point.latitude},${model.currentTouringByPoint.point.longitude}';
                             if (await canLaunch(url)) {
                               await launch(url);
+                              await locator<LocalNotificationsService>().showNotification(
+                                title: "Back to your tour",
+                                body: model.touringBy.tour.name,
+                                payLoad: model.touringBy.id.toString()
+                              );
                             }
                             else{
                               print("not launched");
