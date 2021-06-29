@@ -27,17 +27,45 @@ class _ListItemState extends State<ListItem> with AutomaticKeepAliveClientMixin 
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 6, right: 2),
-                        child: Text(
-                          widget.tour.name,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                widget.tour.name,
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                overflow: TextOverflow.fade,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 7.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    widget.tour.rating,
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 20.0,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

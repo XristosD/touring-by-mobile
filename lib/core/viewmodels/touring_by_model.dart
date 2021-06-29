@@ -14,7 +14,7 @@ import 'package:touring_by/core/services/pick_image_with_dialog_service.dart';
 import 'package:touring_by/locator.dart';
 import 'package:touring_by/ui/shared/app_colors.dart';
 
-enum ViewState {Idle, Completing, Skipping, GettingNext}
+enum ViewState {Idle, Completing, Skipping, GettingNext, Rating}
 
 class TouringByModel extends ChangeNotifier {
   ViewState _state;
@@ -59,12 +59,26 @@ class TouringByModel extends ChangeNotifier {
     response = await locator<TouringByApiService>().finishTouringBy(this.touringBy.id);
     setState(ViewState.Idle);
     if(response.success){
-      print(response.body.toString());
+      // print(response.body.toString());
       return true;
     }
     else{
-      print(this.touringBy.id.toString());
-      print(response.body.toString());
+      // print(this.touringBy.id.toString());
+      // print(response.body.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rateTouringBy(double rating) async {
+    ApiResponse response;
+
+    setState(ViewState.Rating);
+    response = await locator<TouringByApiService>().rateTour(this.touringBy.id, rating.toInt());
+    setState(ViewState.Idle);
+    if(response.success){
+      return true;
+    }
+    else{
       return false;
     }
   }

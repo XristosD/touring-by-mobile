@@ -7,10 +7,12 @@ import 'package:touring_by/ui/shared/app_colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:touring_by/ui/shared/widgets/custom_loading_indicator.dart';
 import 'package:touring_by/ui/take_tour/custom_rounded_button.dart';
+import 'package:touring_by/ui/take_tour/rate_dialog.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point_parent.dart';
 import 'package:touring_by/ui/take_tour/touring_by_point_welcome.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class TouringByView extends StatefulWidget {
   @override
@@ -23,6 +25,15 @@ class _TouringByViewState extends State<TouringByView> {
     target: LatLng( 37.973634, 23.719592),
     zoom: 14.4746,
   );
+
+  void pushFinished({@required BuildContext context, @required int touringById}){
+    Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/show_touring_by',
+        ModalRoute.withName('/'),
+        arguments: touringById
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,13 +152,20 @@ class _TouringByViewState extends State<TouringByView> {
                       showLoadingIndicator: model.state==ViewState.Completing ? true : false,
                       action: () async {
                         if(await model.finishTouringBy()){
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/show_touring_by',
-                            ModalRoute.withName('/'),
-                            arguments: model.touringBy.id
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return RateDialog(
+                                  onCloseDialog: () {
+                                    pushFinished(context: context, touringById: model.touringBy.id);
+                                  },
+                                  onSaveDialog: (rate) async {
+                                    await model.rateTouringBy(rate);
+                                    pushFinished(context: context, touringById: model.touringBy.id);
+                                  },
+                                );
+                              }
                           );
-                          // Navigator.pushNamed(context, '/');
                         }
                       },
                     ),
@@ -182,5 +200,7 @@ class _TouringByViewState extends State<TouringByView> {
       ),
     );
   }
+
 }
+
 
